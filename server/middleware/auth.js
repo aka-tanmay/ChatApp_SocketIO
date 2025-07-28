@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 // Middleware to protect routes
 export const protectRoute = async(req,res,next)=>{
  
-    try {
+    try {   
         const token = req.headers.token;
 
         const decoded =  jwt.verify(token,process.env.JWT_SECRET)
@@ -13,7 +13,7 @@ export const protectRoute = async(req,res,next)=>{
 
         if (!user) return res.json({ success:false,message:"User not found"});
          
-        req.User = user;
+        req.user = user;
         next();
     } catch (error) {
         console.log(error.message);
